@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Resume Analysis</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Resume Analysis</h1>
+
+    <h2>Skills Detected</h2>
+
+    <div class="skills">
+
+        {% for skill in skills %}
+
+            <span class="skill">
+                {{ skill }}
+            </span>
+
+        {% endfor %}
+
+    </div>
+
+
+    <h2>Recommended Job Roles</h2>
+
+    {% for job in recommendations %}
+
+    <div class="job">
+
+        <h3>
+            {{ job.role }}
+        </h3>
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                style="width: {{ job.score }}%"
+            >
+                {{ job.score }}%
+            </div>
+
+        </div>
+
+        {% if job.missing %}
+
+        <p>
+            <strong>Skills to improve:</strong>
+            {{ job.missing | join(", ") }}
+        </p>
+
+        {% else %}
+
+        <p>
+            You have all the required skills!
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endfor %}
+
+    <a href="/">
+        Analyze another resume
+    </a>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
