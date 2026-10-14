@@ -1,51 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Resume Analyzer</title>
+    <title>Resume Analyzer | Career Insights</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
-
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-<div class="container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="brand">
+            <span class="brand-icon">R</span>
+            Resume<span class="brand-highlight">Analyzer</span>
+        </a>
 
-    <h1>Resume Analyzer</h1>
+        <span class="nav-label">AI-Powered Career Assistant</span>
+    </nav>
 
-    <p>
-        Upload your resume and discover suitable job roles.
-    </p>
 
-    <form
-        action="/analyze"
-        method="POST"
-        enctype="multipart/form-data"
-    >
+    <!-- Main Section -->
+    <main class="main-container">
 
-        <label>Select Resume</label>
+        <section class="hero">
 
-        <input
-            type="file"
-            name="resume"
-            accept=".pdf"
-            required
-        >
+            <div class="hero-badge">
+                ✦ YOUR NEXT CAREER MOVE STARTS HERE
+            </div>
 
-        <button type="submit">
-            Analyze Resume
-        </button>
+            <h1>
+                Your Resume.<br>
+                Your <span>Next Opportunity.</span>
+            </h1>
 
-    </form>
+            <p class="hero-description">
+                Discover your skills, explore suitable job roles,
+                and identify the skills you need to grow your career.
+            </p>
 
-</div>
+        </section>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+        <!-- Upload Card -->
+        <section class="upload-card">
+
+            <div class="upload-icon">
+                ↑
+            </div>
+
+            <h2>Analyze Your Resume</h2>
+
+            <p class="upload-description">
+                Upload your resume and receive personalized career insights.
+            </p>
+
+
+            <form action="{{ url_for('analyze') }}"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  id="resumeForm">
+
+                <label for="resume" class="file-label">
+                    Select your resume
+                </label>
+
+                <div class="file-input-wrapper">
+
+                    <input
+                        type="file"
+                        id="resume"
+                        name="resume"
+                        accept=".pdf,application/pdf"
+                        required
+                    >
+
+                </div>
+
+                <p class="file-help">
+                    PDF format only · Maximum size 10 MB
+                </p>
+
+
+                {% if error %}
+                    <div class="error-message" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+
+                <button type="submit"
+                        class="primary-button"
+                        id="analyzeButton">
+
+                    Analyze My Resume <span>→</span>
+
+                </button>
+
+            </form>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    <span class="feature-check">✓</span>
+                    Skill Detection
+                </div>
+
+                <div class="feature">
+                    <span class="feature-check">✓</span>
+                    Job Recommendations
+                </div>
+
+                <div class="feature">
+                    <span class="feature-check">✓</span>
+                    Skill Gap Analysis
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- How It Works -->
+        <section class="how-it-works">
+
+            <h2>How It Works</h2>
+
+            <p class="section-description">
+                Three simple steps to better career insights.
+            </p>
+
+            <div class="steps-grid">
+
+                <article class="step-card">
+                    <div class="step-number">01</div>
+                    <h3>Upload</h3>
+                    <p>Select your resume in PDF format.</p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">02</div>
+                    <h3>Analyze</h3>
+                    <p>Extract technical skills from your resume.</p>
+                </article>
+
+                <article class="step-card">
+                    <div class="step-number">03</div>
+                    <h3>Discover</h3>
+                    <p>Explore job matches and missing skills.</p>
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Resume Analyzer · Built with Python and Flask</p>
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 
